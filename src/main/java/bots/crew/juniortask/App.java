@@ -59,7 +59,7 @@ public class App {
                 if (departmentService.getByName(input) != null) {
                     Department department = departmentService.getByName(input);
                     System.out.println(departmentService.getHeadOfDepartment(department) + "\n");
-                } else {
+                } else if (exit) {
                     System.out.println("Such a department doesn't exist.");
                 }
             } else if (input.equalsIgnoreCase("Get statistic")) {
@@ -73,7 +73,7 @@ public class App {
                 if (departmentService.getByName(input) != null) {
                     Department department = departmentService.getByName(input);
                     System.out.println(departmentService.getStatistic(department) + "\n");
-                } else {
+                } else if (exit) {
                     System.out.println("Such a department doesn't exist.");
                 }
             } else if (input.equalsIgnoreCase("Show the average salary")) {
@@ -87,7 +87,7 @@ public class App {
                 if (departmentService.getByName(input) != null) {
                     Department department = departmentService.getByName(input);
                     System.out.println(departmentService.getAverageSalary(department) + "\n");
-                } else {
+                } else if (exit) {
                     System.out.println("Such a department doesn't exist.");
                 }
             } else if (input.equalsIgnoreCase("Show count of employee")) {
@@ -101,7 +101,7 @@ public class App {
                 if (departmentService.getByName(input) != null) {
                     Department department = departmentService.getByName(input);
                     System.out.println(departmentService.getCountOfEmployee(department) + "\n");
-                } else {
+                } else if (exit) {
                     System.out.println("Such a department doesn't exist.");
                 }
             } else if (input.equals("exit")) {
@@ -122,7 +122,7 @@ public class App {
             if (input.equals("exit")) {
                 exit = false;
             }
-            if (lectorService.getLectorsByTemplate(input).isEmpty()) {
+            if (lectorService.getLectorsByTemplate(input).isEmpty() && exit) {
                 System.out.println("No lecturers found by template " + input);
             }
             for (Lector lector : lectorService.getLectorsByTemplate(input)) {

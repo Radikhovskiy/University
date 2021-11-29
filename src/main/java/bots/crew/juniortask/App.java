@@ -1,9 +1,6 @@
 package bots.crew.juniortask;
 
-import static bots.crew.juniortask.JuniorTaskApplication.exit;
-
 import bots.crew.juniortask.entity.Department;
-import bots.crew.juniortask.entity.Lector;
 import bots.crew.juniortask.service.DepartmentService;
 import bots.crew.juniortask.service.LectorService;
 import java.util.HashSet;
@@ -14,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class App {
+    private static boolean exit = true;
+
     private Initializer initializer;
     private LectorService lectorService;
     private DepartmentService departmentService;
@@ -27,6 +26,10 @@ public class App {
     }
 
     public App() {
+    }
+
+    public static boolean isExit() {
+        return exit;
     }
 
     public void run() {
@@ -125,8 +128,8 @@ public class App {
             if (lectorService.getLectorsByTemplate(input).isEmpty() && exit) {
                 System.out.println("No lecturers found by template " + input);
             }
-            for (Lector lector : lectorService.getLectorsByTemplate(input)) {
-                System.out.println(lector.getName() + " " + lector.getLastName());
+            for (String lector : lectorService.getLectorsByTemplate(input)) {
+                System.out.println(lector);
             }
         } else if (input.equals("exit")) {
             exit = false;

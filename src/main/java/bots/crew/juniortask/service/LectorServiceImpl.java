@@ -2,8 +2,9 @@ package bots.crew.juniortask.service;
 
 import bots.crew.juniortask.entity.Lector;
 import bots.crew.juniortask.repository.LectorRepository;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,10 +26,13 @@ public class LectorServiceImpl implements LectorService {
     }
 
     @Override
-    public List<Lector> getLectorsByTemplate(String template) {
-        return getAll().stream()
-                .filter(l -> l.getName().contains(template)
-                        || l.getLastName().contains(template))
-                .collect(Collectors.toList());
+    public Set<String> getLectorsByTemplate(String template) {
+        Set<String> lectors = new HashSet<>();
+        for (Lector lector: getAll()) {
+            if (lector.getName().contains(template) || lector.getLastName().contains(template)) {
+                lectors.add(lector.getName() + " " + lector.getLastName());
+            }
+        }
+        return lectors;
     }
 }
